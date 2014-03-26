@@ -1,0 +1,436 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div style="width: 100%">
+        <select id="select-pos">
+            <option>NE</option>
+            <option>SE</option>
+            <option>SW</option>
+            <option>NW</option>
+        </select>
+        <input id="input-y" type="number" placeholder="y" />
+        <input id="input-x" type="number" placeholder="x" />
+        <button onclick="updateTarget()">Aggiorna</button>
+    </div>
+    <div style="width: 100%">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+        var players = [
+    {
+        nick: 'ross70',
+        pos: 'SE',
+        y: 069,
+        x: 058
+    },
+    {
+        nick: 'ser cid roga',
+        pos: 'NW',
+        y: 71,
+        x: 544
+    },
+    {
+        nick: 're marco ibis',
+        pos: 'SE',
+        y: 68,
+        x: 50
+    },
+    {
+        nick: 'ikotty',
+        pos: 'SE',
+        y: 460,
+        x: 284
+    },
+    {
+        nick: 'pierugo2',
+        pos: 'NW',
+        y: 345,
+        x: 122
+    },
+    {
+        nick: 'celezio',
+        pos: 'SW',
+        y: 204,
+        x: 199
+    },
+    {
+        nick: 'aresII',
+        pos: 'NE',
+        y: 292,
+        x: 397
+    },
+    {
+        nick: 'chequedead',
+        pos: 'SE',
+        y: 38,
+        x: 34
+    },
+    {
+        nick: 'ilfoy moddy',
+        pos: 'SE',
+        y: 470,
+        x: 290
+    },
+    {
+        nick: 'marshal',
+        pos: 'NE',
+        y: 62,
+        x: 19
+    },
+    {
+        nick: 'filomilo',
+        pos: 'NE',
+        y: 64,
+        x: 19
+    },
+    {
+        nick: 'bubino',
+        pos: 'NW',
+        y: 64,
+        x: 19
+    },
+    {
+        nick: 'ilario',
+        pos: 'NW',
+        y: 172,
+        x: 5
+    },
+    {
+        nick: 'doktor',
+        pos: 'SW',
+        y: 180,
+        x: 171
+    },
+    {
+        nick: 'bladerunner',
+        pos: 'NW',
+        y: 625,
+        x: 246
+    },
+    {
+        nick: 'rotella',
+        pos: 'SE',
+        y: 257,
+        x: 415
+    },
+    {
+        nick: 'fabioo',
+        pos: 'NW',
+        y: 306,
+        x: 360
+    },
+    {
+        nick: 'nikitabo',
+        pos: 'SW',
+        y: 287,
+        x: 490
+    },
+    {
+        nick: 'edotassi',
+        pos: 'NW',
+        y: 338,
+        x: 143
+    },
+    {
+        nick: 'reclaudiano',
+        pos: 'SW',
+        y: 395,
+        x: 196
+    },
+    {
+        nick: 'ciaccio79',
+        pos: 'SW',
+        y: 193,
+        x: 165
+    },
+    {
+        nick: 'fabio lo re',
+        pos: 'SE',
+        y: 79,
+        x: 59
+    },
+    {
+        nick: 'glaudius iaius',
+        pos: 'NW',
+        y: 625,
+        x: 174
+    },
+    {
+        nick: 'mahoojin',
+        pos: 'SE',
+        y: 37,
+        x: 579
+    },
+    {
+        nick: 'king robert',
+        pos: 'NE',
+        y: 309,
+        x: 397
+    },
+    {
+        nick: 'robb',
+        pos: 'NW',
+        y: 149,
+        x: 490
+    },
+    {
+        nick: 'gallo nero',
+        pos: 'SE',
+        y: 81,
+        x: 47
+    },
+    {
+        nick: 'troll il brut',
+        pos: 'NE',
+        y: 611,
+        x: 9
+    },
+    {
+        nick: 'samuray',
+        pos: 'SW',
+        y: 97,
+        x: 83
+    },
+    {
+        nick: 'riccardus',
+        pos: 'NE',
+        y: 590,
+        x: 317
+    },
+    {
+        nick: 'sirzac',
+        pos: 'NE',
+        y: 615,
+        x: 16
+    },
+    {
+        nick: 'luca 90',
+        pos: 'SW',
+        y: 191,
+        x: 161
+    },
+    {
+        nick: 'lord dani',
+        pos: 'NW',
+        y: 22,
+        x: 787
+    },
+    {
+        nick: 'fuecux',
+        pos: 'NW',
+        y: 302,
+        x: 30
+    },
+    {
+        nick: 'sisma 2012',
+        pos: 'NW',
+        y: 499,
+        x: 355
+    },
+    {
+        nick: 'kenzo ken',
+        pos: 'SE',
+        y: 54,
+        x: 378
+    },
+    {
+        nick: 'reisoglu',
+        pos: 'SE',
+        y: 459,
+        x: 296
+    },
+    {
+        nick: 'cesareaugusto',
+        pos: 'NE',
+        y: 12,
+        x: 69
+    },
+    {
+        nick: 'milano',
+        pos: 'SE',
+        y: 485,
+        x: 232
+    },
+    {
+        nick: 'ragno tenace',
+        pos: 'SW',
+        y: 158,
+        x: 389
+    },
+    {
+        nick: 'cristianrid',
+        pos: 'SW',
+        y: 11,
+        x: 56
+    },
+    {
+        nick: 'marco 98u',
+        pos: 'SW',
+        y: 309,
+        x: 461
+    },
+    {
+        nick: 'musashi',
+        pos: 'SE',
+        y: 467,
+        x: 267
+    },
+    {
+        nick: 'immortal<2>',
+        pos: 'SW',
+        y: 24,
+        x: 54
+    },
+    {
+        nick: 'artu',
+        pos: 'SE',
+        y: 65,
+        x: 20
+    },
+    {
+        nick: 'telio',
+        pos: 'NE',
+        y: 564,
+        x: 48
+    },
+    {
+        nick: 'judgment',
+        pos: 'NE',
+        y: 184,
+        x: 658
+    },
+    {
+        nick: 'faceless',
+        pos: 'SE',
+        y: 437,
+        x: 419
+    }
+        ];
+
+        var canvasWidth = 1400;
+        var canvasHeight = 1400;
+        var canvasDelta = canvasWidth / 2;
+
+        var inputX = document.getElementById('input-x');
+        var inputY = document.getElementById('input-y');
+        var selectPos = document.getElementById('select-pos');
+
+        var canvas = document.getElementById('canvas');
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        var ctx = canvas.getContext('2d');
+
+        drawAxis();
+
+        for (var i = 0; i < players.length; i++) {
+            var player = players[i];
+            drawPlayer(player);
+        }
+
+        function updateTarget() {
+            var target = {
+                nick: 'target',
+                pos: selectPos.value,
+                y: parseInt(inputY.value),
+                x: parseInt(inputX.value)
+            };
+
+            console.log(target);
+
+            clear();
+            drawAxis();
+            drawAllPlayer();
+            drawPlayer(target, true);
+        }
+
+        function drawAllPlayer() {
+            for (var i = 0; i < players.length; i++) {
+                var player = players[i];
+                drawPlayer(player);
+            }
+        }
+
+        function drawPlayer(player, target) {
+            var posx = traslateXPlayer(player, canvasDelta);
+            var posy = traslateYPlayer(player, canvasDelta);
+            ctx.fillStyle = target ? "rgb(255, 0, 0)" : "rgb(0, 0, 0)";
+            ctx.fillRect(posx, posy, 3, 3);
+            ctx.fillStyle = target ? "rgba(255, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.4)";
+            ctx.fillText(player.nick, posx, posy - 3);
+        }
+
+        function traslateXPlayer(player, delta) {
+            var x = 0;
+            switch (player.pos) {
+                case ('NW'): {
+                    x = -(player.x);
+                    break;
+                }
+                case ('NE'): {
+                    x = player.x;
+                    break;
+                }
+                case ('SE'): {
+                    x = player.x;
+                    break;
+                }
+                case ('SW'): {
+                    x = -(player.x);
+                    break;
+                }
+            }
+
+            return x + delta;
+        }
+
+        function traslateYPlayer(player, delta) {
+            var y = 0;
+            switch (player.pos) {
+                case ('NW'): {
+                    y = -player.y;
+                    break;
+                }
+                case ('NE'): {
+                    y = -player.y;
+                    break;
+                }
+                case ('SE'): {
+                    y = player.y;
+                    break;
+                }
+                case ('SW'): {
+                    y = player.y;
+                    break;
+                }
+            }
+
+            return y + delta;
+        }
+
+        function clear() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        }
+
+        function drawAxis() {
+            ctx.beginPath();
+            ctx.moveTo(0, canvasHeight / 2);
+            ctx.lineTo(canvasWidth, canvasHeight / 2);
+            ctx.moveTo(canvasWidth / 2, 0);
+            ctx.lineTo(canvasWidth / 2, canvasHeight);
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
